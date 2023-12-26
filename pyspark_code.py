@@ -120,7 +120,6 @@ class GlueETLJob:
         self.__write_to_s3_as_parquet(mapped_frame)
         self.job.commit()
 
-# Usage:
 if __name__ == "__main__":
     args = getResolvedOptions(sys.argv, ["JOB_NAME"])
     job_name = args["JOB_NAME"]
