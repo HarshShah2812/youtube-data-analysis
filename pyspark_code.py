@@ -13,7 +13,7 @@ class GlueETLJob:
 
     def __init__(self, job_name):
         """
-        Initializes the GlueETLJob instance.
+        Initialises the GlueETLJob instance.
 
         Parameters
         ----------
