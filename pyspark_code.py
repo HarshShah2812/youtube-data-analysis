@@ -19,6 +19,7 @@ class GlueETLJob:
         ----------
         - job_name (str): The name of the Glue job.
         """
+        # Initialising Glue context, Spark session, and the job
         self.job_name = job_name
         self.sc = SparkContext()
         self.glue_context = GlueContext(self.sc)
@@ -40,6 +41,7 @@ class GlueETLJob:
         -------
         - datasource0: A DynamicFrame containing the read data.
         """
+        # Reading data from the Glue Data Catalog with predicate pushdown
         datasource0 = self.glue_context.create_dynamic_frame.from_catalog(
             database=database,
             table_name=table,
@@ -60,7 +62,9 @@ class GlueETLJob:
         -------
         - mapped_dyf: A DynamicFrame with applied mapping.
         """
+        # Mapping columns in the DynamicFrame
         mappings = [
+            # List of column mappings
             ("video_id", "string", "video_id", "string"),
             ("trending_date", "string", "trending_date", "string"),
             ("title", "string", "title", "string"),
@@ -94,9 +98,11 @@ class GlueETLJob:
         -------
         - datasink4: DynamicFrame written in parquet format
         """
+        # Converting DynamicFrame to DataFrame, coalescing to a single file, and converting back to DynamicFrame
         datasink1 = dynamic_frame.toDF().coalesce(1)
         df_final_output = DynamicFrame.fromDF(datasink1, self.glue_context, "df_final_output")
 
+        # Writing the DynamicFrame to S3 in Parquet format
         datasink4 = self.glue_context.write_dynamic_frame.from_options(
             frame=df_final_output,
             connection_type="s3",
@@ -114,16 +120,23 @@ class GlueETLJob:
         """
         Executes the ETL job.
         """
+        # Filtering predicate for reading data from the Glue Catalog
         predicate_pushdown = "region in ('ca','gb','us')"
+        # Reading from Glue Catalog
         datasource = self.__read_from_catalog("youtube_raw", "raw_statistics", predicate_pushdown)
+        # Applying mapping to the data
         mapped_frame = self.__apply_mapping(datasource)
+        # Writing the processed data to S3 in Parquet format
         self.__write_to_s3_as_parquet(mapped_frame)
+        # Committing the job
         self.job.commit()
 
 if __name__ == "__main__":
+    # Assuming the job name is provided as an argument
     args = getResolvedOptions(sys.argv, ["JOB_NAME"])
     job_name = args["JOB_NAME"]
 
+    # Creating an instance of GlueETLJob and execute the job
     etl_job = GlueETLJob(job_name)
     etl_job.run_job()
 
