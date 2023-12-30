@@ -23,7 +23,7 @@ class GlueETLJob:
         self.job = Job(self.glue_context)
         self.job.init(self.job_name)
 
-    def read_from_catalog(self, database, table, transformation_ctx):
+    def __read_from_catalog(self, database, table, transformation_ctx):
         """
         Reads data from the Glue Data Catalog.
 
@@ -43,7 +43,7 @@ class GlueETLJob:
         )
         return dyf
 
-    def join_frames(self, frame1, frame2, keys1, keys2, transformation_ctx):
+    def __join_frames(self, frame1, frame2, keys1, keys2, transformation_ctx):
         """
         Joins two DynamicFrames.
 
@@ -66,7 +66,7 @@ class GlueETLJob:
         )
         return frame_join
 
-    def write_to_s3(self, sink_path, connection_type, update_behavior, partition_keys,
+    def __write_to_s3(self, sink_path, connection_type, update_behavior, partition_keys,
                     compression, enable_update_catalog, transformation_ctx, catalog_db, catalog_table,
                     sink_format, frame):
         """
@@ -109,11 +109,11 @@ class GlueETLJob:
         Executes the ETL job.
         """
         # Read data from Glue Data Catalog
-        frame1 = self.read_from_catalog("db_youtube_cleaned", "raw_statistics", "AWSGlueDataCatalog_node1")
-        frame2 = self.read_from_catalog("db_youtube_cleaned", "cleaned_statistics_reference_data", "AWSGlueDataCatalog_node2")
+        frame1 = self.__read_from_catalog("db_youtube_cleaned", "raw_statistics", "AWSGlueDataCatalog_node1")
+        frame2 = self.__read_from_catalog("db_youtube_cleaned", "cleaned_statistics_reference_data", "AWSGlueDataCatalog_node2")
 
         # Join the obtained frames
-        joined_frame = self.join_frames(
+        joined_frame = self.__join_frames(
             frame1=frame1,
             frame2=frame2,
             keys1=["category_id"],
@@ -122,7 +122,7 @@ class GlueETLJob:
         )
 
         # Write the joined frame to Amazon S3
-        self.write_to_s3(
+        self.__write_to_s3(
             sink_path="s3://youtube-analytics-data-useast1-dev",
             connection_type="s3",
             update_behavior="UPDATE_IN_DATABASE",
