@@ -25,5 +25,6 @@ Firstly, I created an IAM user to build the project through, as opposed to using
 ## Setting up AWS CLI
 I installed AWS CLI from the AWS website. Next, I used the `aws configure` command in the terminal, providing the access key and secret access key to set up the IAM user on the CLI, as well as further information such as a the region.
 
-
+## Creating an initial S3 bucket
+I created an initial S3 bucket to store the raw data in, naming it "youtube-raw-data-useast1-dev". The data utilised in the project consists of both the raw data (csv) and the corresponding reference data (json). After adding the files to the directory, I then used the following command: `aws s3 cp . s3://youtube-raw-data-useast1-dev/youtube/raw_statistics_reference_data/ --recursive --exclude "*" --include "*.json"` to copy the reference data to the s3 bucket; to copy the actual data, I used the following command, replacing the region, which is 'ca' in this case, for each country: `aws s3 cp CAvideos.csv s3://youtube-raw-data-useast1-dev/youtube/raw_statistics/region=ca/`. This ensured that each csv file would get stored in an individual folder corresponding to each country. 
 
