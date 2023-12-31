@@ -23,8 +23,13 @@ This aim of the project is to manage, streamline, and analyse structured and sem
 Firstly, I created an IAM user to build the project through, as opposed to using the root account (the account you set up using your e-mail). I also attached existing permissions to the user for each of the services used as the project progressed.
 
 ## Setting up AWS CLI
-I installed AWS CLI from the AWS website. Next, I used the `aws configure` command in the terminal, providing the access key and secret access key to set up the IAM user on the CLI, as well as further information such as a the region.
+I installed AWS CLI from the AWS website. Next, I used the `aws configure` command in the terminal, providing the access key and secret access key to set up the IAM user on the CLI, as well as further information such as the region.
 
 ## Creating an initial S3 bucket
 I created an initial S3 bucket to store the raw data in, naming it "youtube-raw-data-useast1-dev". The data utilised in the project consists of both the raw data (csv) and the corresponding reference data (json). After adding the files to the directory, I then used the following command: `aws s3 cp . s3://youtube-raw-data-useast1-dev/youtube/raw_statistics_reference_data/ --recursive --exclude "*" --include "*.json"` to copy the reference data to the s3 bucket; to copy the actual data, I used the following command, replacing the region, which is 'ca' in this case, for each country: `aws s3 cp CAvideos.csv s3://youtube-raw-data-useast1-dev/youtube/raw_statistics/region=ca/`. This ensured that each csv file would get stored in an individual folder corresponding to each country. 
+
+## Creating the Glue catalog, and querying the data with AWS Athena and SQL
+After creating the bucket, I now had to create the AWS Glue catalog. This included creating a crawler, which I called "youtube-raw-data-glue-catalog-1", to access the data in the S3 bucket (the reference data in particular), extract the metadata, and create table definitions in the Glue catalog. While creating the crawler, I had to create a new database in which the raw data would be stored, which I called youtube_raw. After the crawler had successfully run, a table was now created, which contained the reference data.
+
+When opening up Athena, I was prompted to add an S3 bucket where the query results would be stored; I called mine 'youtube-raw-data-useast1-athena-job'. I then attempted to query the data, however, this was unsuccessful due to the way in which the reference data was formatted in each JSON file, and as a result, Glue was unable to read it.
 
