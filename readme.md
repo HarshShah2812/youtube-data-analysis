@@ -33,3 +33,6 @@ After creating the bucket, I now had to create the AWS Glue catalog. This includ
 
 When opening up Athena, I was prompted to add an S3 bucket where the query results would be stored; I called mine 'youtube-raw-data-useast1-athena-job'. I then attempted to query the data, however, this was unsuccessful due to the way in which the reference data was formatted in each JSON file, and as a result, Glue was unable to read it.
 
+## Building an AWS Lambda function to convert the JSON data to Parquet
+As a result of this error, I built a Lambda function to convert the reference data to Parquet format, due to its row-column structure, making it more computer-readable. Initially, I performed a test run on the code by sampling a json file corresponding to the US. After initially getting an error due to the AWS Wrangler module not being present, I added an AWS layer, which then allowed the Aws Wrangler module to be imported. When trying to run the script again, I then received a timeout error, however, after incresing the memory allocated to run the function, it ran successfully, creating and storing a parquet file in an S3 bucket for the cleansed data, while also creating a new database and table containing this information within the Glue catalog.
+
