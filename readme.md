@@ -39,7 +39,7 @@ As a result of this error, I built a Lambda function to convert the reference da
 When trying to run the script again, I then received a timeout error, however, after incresing the memory allocated to run the function, it ran successfully, creating and storing the US reference data in parquet format, in an S3 bucket corresponding to cleansed data, which I called 'youtube-cleansed-data-useast1-dev', while also creating a new database called "db_youtube_cleaned" and table containing this information within the Glue catalog. This time, I was able to query the data successfully using Athena.
 
 ## Building a crawler to access the actual data
-After transforming the reference data, it was now time to work on the actual data. I built and ran another crawler that would crawl through the actual data, which was in csv format, and add the data to the 'youtube_raw' database by creating another table called 'raw_statistics', while also partitioning the data based on the region. Eventually, after making changes to the schema of the 'raw_statistics' table, deleting the parquet file corresponding to the US reference data, and re-testing the lambda function, the following SQL query ran successfully:
+After transforming the reference data, it was now time to work on the actual data. I built and ran another crawler, called 'youtube-raw-data-csv-crawler', that would crawl through the actual data, which was in csv format, and add the data to the 'youtube_raw' database by creating another table called 'raw_statistics', while also partitioning the data based on the region. Eventually, after making changes to the schema of the 'raw_statistics' table, deleting the parquet file corresponding to the US reference data, and re-testing the lambda function, the following SQL query ran successfully:
 
 ```sql 
 SELECT a.title, a.category_id, b.snippet_title FROM "youtube_raw"."raw_statistics" as a
@@ -52,6 +52,6 @@ WHERE a.region = 'us';
 Next, I built the first ETL pipeline, which transforms the csv data to parquet format, and stores it in the 'youtube-cleansed-data-useast1-dev' S3 bucket, partitioning each file based on region. For the sake of this project, I applied a filter to only work with the data corresponding to the UK, USA, and Canada, due to the encoding required to work with the data corresponding to some of the other countries, such as Japan and Korea. The code can be found in the [pyspark_code.py](https://github.com/HarshShah2812/youtube-data-analysis/blob/main/pyspark_code.py) file above.
 
 ## Crawling the actual data again and adding a trigger to the Lambda function
-I created another crawler to access the actual data in the "youtube_raw" database, and store the resulting data in the "db_youtube_cleaned" database. 
+I created another crawler, called 'youtube-cleaned-data-csv-to-parquet-etl', to access the actual data in the "youtube_raw" database, and store the resulting data in the "db_youtube_cleaned" database. 
 
 In order to automate the transformation of the json files to parquet, I added an S3 trigger to the Lambda function. To test this trigger, I deleted the existing files from the S3 bucket, and copied the json files in the local directory to the S3 bucket using AWS CLI, with the result being that the files were automatically transformed to parquet and stored in the "youtube-cleansed-data-useast1-dev" bucket.
