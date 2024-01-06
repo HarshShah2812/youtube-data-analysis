@@ -37,6 +37,7 @@ When opening up Athena, I was prompted to add an S3 bucket where the query resul
 As a result of this error, I built a Lambda function to convert the reference data to Parquet format, due to its row-column structure, making it more computer-readable. Initially, I performed a test run on the code by sampling a json file corresponding to the US. After initially getting an error due to the AWS Wrangler module not being present, I added an AWS layer, which then allowed the AWS Wrangler module to be imported. 
 
 When trying to run the script again, I then received a timeout error, however, after incresing the memory allocated to run the function, it ran successfully, creating and storing the US reference data in parquet format, in an S3 bucket corresponding to cleansed data, which I called 'youtube-cleansed-data-useast1-dev', while also creating a new database called "db_youtube_cleaned" and table containing this information, which I called 'cleaned_statistics_reference_data', within the Glue catalog. This time, I was able to query the data successfully using Athena. The result can be seen below:
+
 <img width="1089" alt="Screenshot 2024-01-06 at 17 27 55" src="https://github.com/HarshShah2812/youtube-data-analysis/assets/67421468/d84f75ac-056f-4f64-b168-fd7d999f0d5d">
 
 ## Building a crawler to access the actual data
