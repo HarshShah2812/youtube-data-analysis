@@ -59,7 +59,7 @@ I created another crawler, called 'youtube-cleaned-data-csv-to-parquet-etl', to 
 In order to automate the transformation of the json files to parquet, I added an S3 trigger to the Lambda function. To test this trigger, I deleted the existing files from the S3 bucket, and copied the json files in the local directory to the S3 bucket using AWS CLI, with the result being that the files were automatically transformed to parquet and stored in the "youtube-cleansed-data-useast1-dev" bucket.
 
 ## Building the final ETL pipeline
-Using AWS Glue, I built the final ETL job, calling it 'youtube-parquet-analytics-version', to prepare the cleaned data for analysis. This job would read both the actual and reference data stored in the 'db_youtube_cleaned' database, join them, and write the joined frame to another S3 bucket, which I called 'youtube-analytics-data-useast1-dev', to store the analytics-ready data. The code can be found in the [parquet_analytics_etl_job.py](https://github.com/HarshShah2812/youtube-data-analysis/blob/main/parquet_analytics_etl_job.py) file above.
+Using AWS Glue, I built the final ETL job, calling it 'youtube-parquet-analytics-version', to prepare the cleaned data for analysis. This job would read both the actual and reference data stored in the 'db_youtube_cleaned' database, join them, and write the joined frame to another S3 bucket, which I called 'youtube-analytics-data-useast1-dev', to store the analytics-ready data, as well as storing the data in a new database called 'db_youtube_analysis'. The code can be found in the [parquet_analytics_etl_job.py](https://github.com/HarshShah2812/youtube-data-analysis/blob/main/parquet_analytics_etl_job.py) file above.
 
 The resulting folders in the S3 bucket look something like this:
 
