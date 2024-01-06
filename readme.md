@@ -61,7 +61,7 @@ In order to automate the transformation of the json files to parquet, I added an
 ## Building the final ETL pipeline
 Using AWS Glue, I built the final ETL job, calling it 'youtube-parquet-analytics-version', to prepare the cleaned data for analysis. This job would read both the actual and reference data stored in the 'db_youtube_cleaned' database, join them, and write the joined frame to another S3 bucket, which I called 'youtube-analytics-data-useast1-dev', to store the analytics-ready data. The code can be found in the [parquet_analytics_etl_job.py](https://github.com/HarshShah2812/youtube-data-analysis/blob/main/parquet_analytics_etl_job.py) file above.
 
-The resulting folders in the S3 bucket looks something like this:
+The resulting folders in the S3 bucket look something like this:
 
 <img width="1089" alt="Screenshot 2024-01-06 at 16 37 18" src="https://github.com/HarshShah2812/youtube-data-analysis/assets/67421468/fc633f05-60df-4493-8845-14efa1bcfdf0">
 
