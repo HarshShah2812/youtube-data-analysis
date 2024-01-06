@@ -61,4 +61,6 @@ Using AWS Glue, I built the final ETL job, calling it 'youtube-parquet-analytics
 
 The resulting data in the S3 bucket looks something like this:
 
+<img width="1089" alt="Screenshot 2024-01-06 at 16 37 18" src="https://github.com/HarshShah2812/youtube-data-analysis/assets/67421468/fc633f05-60df-4493-8845-14efa1bcfdf0">
+
 <img width="1089" alt="Screenshot 2024-01-06 at 12 04 34" src="https://github.com/HarshShah2812/youtube-data-analysis/assets/67421468/71a01f7a-7d00-447d-aa1b-b869344a59cf">
