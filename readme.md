@@ -75,5 +75,5 @@ The resulting folders in the S3 bucket look something like this:
 <img width="1089" alt="Screenshot 2024-01-06 at 12 04 34" src="https://github.com/HarshShah2812/youtube-data-analysis/assets/67421468/71a01f7a-7d00-447d-aa1b-b869344a59cf">
 
 ## Building a dashboard using QuickSight
-Lastly, after creating a QuickSight account, I built a dashboard to display different metrics that would aid the company in creating a successful advertisement campaign, which can be seen [here](https://us-east-1.quicksight.aws.amazon.com/sn/accounts/497276922945/dashboards/98eac95b-99ab-48ed-acd6-d564a0a2a9cd?directory_alias=harsh2812)
+Lastly, after creating a QuickSight account, I built a dashboard to display different metrics that would aid the company in creating a successful advertisement campaign, which can be seen [here](https://github.com/HarshShah2812/youtube-data-analysis/blob/main/final_dashboard.pdf)
 
