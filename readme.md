@@ -17,7 +17,7 @@ This aim of the project is to manage, streamline, and analyse structured and sem
 4. AWS Glue - A serverless data integration service that makes it easier to discover, prepare, move, and integrate data from multiple sources for analytics, Machine Learning (ML), and application development
 5. AWS Athena - An interactive query service that makes it simple to analyse data stored in S3, using standard SQL
 6. AWS Lambda - A serverless compute service that allows users to run code without having to worry about running servers
-7. AWS Quicksight - A fully managed, serverless Business Intelligence (BI) service for the AWS cloud
+7. AWS QuickSight - A fully managed, serverless Business Intelligence (BI) service for the AWS cloud
 
 Disclaimer: You may be charged for using some of these services
 
