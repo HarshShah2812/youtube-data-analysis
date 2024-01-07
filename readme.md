@@ -1,13 +1,13 @@
-# Youtube Data Analysis
-> A company wants to run an advertisement campaign, and they've selected Youtube as their main channel. However, they want to understand current trends in Youtube data before commencing.
+# YouTube Data Analysis
+> A company wants to run an advertisement campaign, and they've selected YouTube as their main channel. However, they want to understand current trends in YouTube data before commencing.
 
 ## Overview
-This aim of the project is to manage, streamline, and analyse structured and semi-structured Youtube data in a secure manner, based on various video categories and trending metrics. This project was completed with the help of the following tutorial: https://youtu.be/yZKJFKu49Dk?si=KMwbZ8mQxPs4agMc
+This aim of the project is to manage, streamline, and analyse structured and semi-structured YouTube data in a secure manner, based on various video categories and trending metrics. This project was completed with the help of the following tutorial: https://youtu.be/yZKJFKu49Dk?si=KMwbZ8mQxPs4agMc
 
 ## Project goals
 1. Data ingestion - Developing a mechanism to ingest data from various sources
 2. ETL - Obtaining data in raw format, transforming it into a proper format
-3. Reporting - Building a dashboard to identify current trends in Youtube data
+3. Reporting - Building a dashboard to identify current trends in YouTube data
 4. Cloud computing - Understanding and utilising various cloud-based services to process large amounts of data
 
 ## Services used
