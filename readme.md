@@ -2,7 +2,7 @@
 > A company wants to run an advertisement campaign, and they've selected YouTube as their main channel. However, they want to understand current trends in YouTube data before commencing.
 
 ## Overview
-This aim of the project is to manage, streamline, and analyse structured and semi-structured YouTube data in a secure manner, based on various video categories and trending metrics. This project was completed with the help of the following tutorial: https://youtu.be/yZKJFKu49Dk?si=KMwbZ8mQxPs4agMc
+This aim of the project is to manage, streamline, and analyse structured and semi-structured YouTube data in a secure manner, based on various video categories and trending metrics.
 
 ## Project goals
 1. Data ingestion - Developing a mechanism to ingest data from various sources
